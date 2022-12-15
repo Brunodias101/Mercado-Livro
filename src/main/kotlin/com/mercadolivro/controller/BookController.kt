@@ -2,9 +2,7 @@ package com.mercadolivro.controller
 
 import com.mercadolivro.controller.request.PostBookRequest
 import com.mercadolivro.controller.request.PutBookRequest
-import com.mercadolivro.controller.request.PutCustomerRequest
 import com.mercadolivro.extension.toBookModel
-import com.mercadolivro.extension.toCustomerModel
 import com.mercadolivro.model.BookModel
 import com.mercadolivro.service.BookService
 import com.mercadolivro.service.CustomerService
@@ -21,7 +19,7 @@ class BookController(
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody request: PostBookRequest) {
-        val customer = customerService.getById(request.customerId)
+        val customer = customerService.findById(request.customerId)
         bookService.create(request.toBookModel(customer))
     }
 
